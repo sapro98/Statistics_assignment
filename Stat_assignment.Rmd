@@ -1,0 +1,27 @@
+---
+title: "Statisticsassginment"
+author: "pratap"
+date: "25/09/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+data_iris <- iris
+summary(data_iris)
+stat.desc(data_iris)
+tab <- table(data_iris$Sepal.Length)
+data_iris$size <- ifelse(data_iris$Sepal.Length < median(data_iris$Sepal.Length),"small","big")
+table(data_iris$size)
+table(data_iris$Species,data_iris$size)
+mosaicplot(table(data_iris$Species,data_iris$size),color = "skyblue")
+boxplot(data_iris$Sepal.Length~data_iris$Species,col = "skyblue")
+hist(data_iris$Sepal.Length,col="skyblue")
+boxplot(data_iris$Sepal.Width~data_iris$Species,col = "skyblue")
+hist(data_iris$Sepal.Width,col="skyblue")
+boxplot(data_iris$Petal.Length~data_iris$Species,col = "skyblue")
+hist(data_iris$Petal.Length,col="skyblue")
+boxplot(data_iris$Petal.Width~data_iris$Species,col = "skyblue")
+hist(data_iris$Petal.Width,col="skyblue")
+
+
+```
