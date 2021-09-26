@@ -1,0 +1,102 @@
+---
+title: "Assignment2"
+author: "pratap"
+date: "15/09/2021"
+output: word_document
+---
+```{r}
+#initiating the values for accidents
+a <- rpois(12,7.5)
+# if cost of an accident costs 25000
+finalcost <- sum(25000*a)
+finalcost
+#lets take a sample of random 1000 values
+b <- replicate(1000, finalcost)
+#finding mean of b
+finalmean <-  mean(b)
+finalmean
+
+```
+
+```{r setup, include=FALSE}
+#Initiating n,p,k,q values of binomial distribution
+n <- 100
+k <- 110
+p <- 0.88
+q <- 1-p
+
+# X is P(X<=100)
+X <- pbinom(n,k,p)
+X
+
+#Y is P(X>100) i.e, to find till k=110
+Y <- 1-X
+Y
+
+#trail & error to check the value of probability close to 0.05
+# lets take n=100,k=101,p=0.88
+X1 <-1- pbinom(n,101,p)
+X1
+
+# lets take n=100,k=101,p=0.88
+X5 <-1- pbinom(n,105,p)
+X5
+
+# lets take n=100,k=108,p=0.88
+X8 <-1- pbinom(n,108,p)
+X8
+
+# lets take n=100,k=109,p=0.88
+X9 <-1- pbinom(n,109,p)
+X9
+
+
+#To find the probability of overbooking when 108 tickets are sold 
+#n=108,size=1,p=0.88
+n <- 108
+size <- 1
+bernoulli <- rbinom(n,size,p)
+bernoulli
+
+# To check if more than 100 tickets are sold and the airline overbooks
+if (sum(bernoulli)>100) 1 else 0
+
+#let us assume we have around 10000 trails for simulation
+trails <-  replicate(1000, if(sum(rbinom(108,1,0.88))>100) 1 else 0)
+trails
+
+#finding mean for them
+finalmean <- mean(trails)
+finalmean
+
+
+
+```
+
+
+```{r setup, include=FALSE}
+#Initiating values
+a <- 10000
+n <-  100
+x <- n
+r <-  round(n/exp(1))
+vector1 <-  vector(length=a)
+#execution for finding the largest number
+for (j in 1:a){
+  numbers <-  sample(1:n,n)
+  best <-  which(numbers ==x)
+  prob <- 0
+  firstr <-  max(numbers[1:r])
+  for (i in (r+1):n){
+    if (numbers[i] > firstr){
+      if(numbers[i] == x)prob <- 1
+      break}
+    else {prob <- 0}
+  }
+  vector1[j] <-  prob
+}
+n
+vector1
+#mean of vector1
+b <- mean(vector1)
+```
